@@ -123,28 +123,36 @@ function RoleBadge({ roles, isDark = true }) {
 }
 
 /**
- * Mobile fallback background
+ * Mobile fallback background - supports light and dark modes
  */
-function MobileFallback() {
+function MobileFallback({ isDark = true }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neural-950 via-neural-dark to-neural-950" />
+      <div className={`absolute inset-0 ${
+        isDark 
+          ? 'bg-gradient-to-br from-neural-950 via-neural-dark to-neural-950' 
+          : 'bg-gradient-to-br from-sky-50 via-slate-100 to-indigo-50'
+      }`} />
       
       {/* Animated grid */}
-      <div className="absolute inset-0 neural-grid-bg opacity-30" />
+      <div className={`absolute inset-0 neural-grid-bg ${
+        isDark ? 'opacity-30' : 'opacity-10'
+      }`} />
       
-      {/* Floating orbs */}
+      {/* Floating orbs - animated particles */}
       <motion.div
         animate={{
           y: [-20, 20, -20],
           x: [-10, 10, -10],
-          scale: [1, 1.1, 1]
+          scale: [1, 1.2, 1]
         }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full"
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%)',
+          background: isDark 
+            ? 'radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(56,189,248,0.3) 0%, transparent 70%)',
           filter: 'blur(40px)'
         }}
       />
@@ -154,21 +162,84 @@ function MobileFallback() {
           x: [10, -10, 10],
           scale: [1.1, 1, 1.1]
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full"
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-56 sm:h-56 rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)',
+          background: isDark 
+            ? 'radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(147,51,234,0.2) 0%, transparent 70%)',
+          filter: 'blur(35px)'
+        }}
+      />
+      
+      {/* Extra animated orb for more visual interest */}
+      <motion.div
+        animate={{
+          y: [-15, 25, -15],
+          x: [15, -15, 15],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/2 right-1/3 w-32 h-32 sm:w-44 sm:h-44 rounded-full"
+        style={{
+          background: isDark 
+            ? 'radial-gradient(circle, rgba(236,72,153,0.12) 0%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(244,114,182,0.2) 0%, transparent 70%)',
           filter: 'blur(30px)'
         }}
       />
 
       {/* Central glow */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-50"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-full opacity-60"
         style={{
-          background: 'radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 60%)'
+          background: isDark 
+            ? 'radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 60%)'
+            : 'radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 60%)'
         }}
       />
+
+      {/* Animated floating particles */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className={`absolute w-2 h-2 rounded-full ${
+            isDark ? 'bg-neural-glow/40' : 'bg-sky-400/50'
+          }`}
+          style={{
+            left: `${15 + i * 15}%`,
+            top: `${20 + (i % 3) * 25}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, i % 2 === 0 ? 10 : -10, 0],
+            opacity: [0.3, 0.8, 0.3],
+            scale: [1, 1.3, 1]
+          }}
+          transition={{
+            duration: 3 + i * 0.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: i * 0.3
+          }}
+        />
+      ))}
+
+      {/* Subtle mesh gradient overlay for light mode */}
+      {!isDark && (
+        <div 
+          className="absolute inset-0 opacity-50"
+          style={{
+            background: `
+              radial-gradient(at 40% 20%, rgba(56,189,248,0.15) 0px, transparent 50%),
+              radial-gradient(at 80% 0%, rgba(147,51,234,0.1) 0px, transparent 50%),
+              radial-gradient(at 0% 50%, rgba(236,72,153,0.1) 0px, transparent 50%),
+              radial-gradient(at 80% 50%, rgba(14,165,233,0.1) 0px, transparent 50%),
+              radial-gradient(at 0% 100%, rgba(99,102,241,0.1) 0px, transparent 50%)
+            `
+          }}
+        />
+      )}
     </div>
   )
 }
@@ -317,7 +388,7 @@ export default function HeroSection() {
         style={{ opacity: sceneOpacity }}
       >
         {isMobile || prefersReducedMotion ? (
-          <MobileFallback />
+          <MobileFallback isDark={isDark} />
         ) : (
           <Scene3D scrollProgress={scrollProgress.get()} />
         )}

@@ -18,37 +18,96 @@ function CategoryBadge({ category, color, count }) {
   )
 }
 
-// Skill bar for mobile/fallback view
-function SkillBar({ skill, index }) {
+// Skill bar for mobile/fallback view - Enhanced galaxy-style card
+function SkillBar({ skill, index, isDark }) {
   const [ref, isInView] = useInView({ threshold: 0.3, once: true })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -30 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group"
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      className={`group relative overflow-hidden rounded-xl p-4 cursor-pointer transition-all duration-300 ${
+        isDark 
+          ? 'bg-neural-900/60 border border-neural-800 hover:border-neural-glow/40 hover:bg-neural-900/80'
+          : 'bg-white border border-slate-200 hover:border-sky-300 hover:shadow-lg shadow-md'
+      }`}
     >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-white group-hover:text-neural-glow transition-colors">
-          {skill.name}
-        </span>
-        <span className="text-xs font-mono text-neural-400">
+      {/* Glow effect on hover */}
+      <motion.div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          background: isDark 
+            ? `radial-gradient(circle at center, ${skill.color}15 0%, transparent 70%)`
+            : `radial-gradient(circle at center, ${skill.color}20 0%, transparent 70%)`
+        }}
+      />
+      
+      {/* Skill icon/orb */}
+      <div className="flex items-center gap-3 mb-3">
+        <motion.div 
+          className="relative w-10 h-10 rounded-full flex items-center justify-center"
+          whileHover={{ rotate: 360 }}
+          transition={{ duration: 0.6 }}
+          style={{
+            background: `linear-gradient(135deg, ${skill.color}30, ${skill.color}10)`,
+            boxShadow: `0 0 15px ${skill.color}30`
+          }}
+        >
+          <div 
+            className="w-4 h-4 rounded-full"
+            style={{ 
+              backgroundColor: skill.color,
+              boxShadow: `0 0 10px ${skill.color}`
+            }}
+          />
+        </motion.div>
+        <div className="flex-1">
+          <span className={`text-sm font-semibold block ${
+            isDark ? 'text-white group-hover:text-neural-glow' : 'text-slate-800 group-hover:text-sky-600'
+          } transition-colors`}>
+            {skill.name}
+          </span>
+          <span className={`text-xs capitalize ${
+            isDark ? 'text-neural-500' : 'text-slate-500'
+          }`}>
+            {skill.category === 'ml' ? 'AI & ML' : skill.category === 'lang' ? 'Language' : skill.category === 'framework' ? 'Framework' : 'Tool'}
+          </span>
+        </div>
+        <span className={`font-mono text-lg font-bold ${
+          isDark ? 'text-neural-glow' : 'text-sky-600'
+        }`}>
           {skill.level}%
         </span>
       </div>
-      <div className="h-2 bg-neural-900 rounded-full overflow-hidden">
+      
+      {/* Progress bar */}
+      <div className={`h-2 rounded-full overflow-hidden ${
+        isDark ? 'bg-neural-950' : 'bg-slate-100'
+      }`}>
         <motion.div
           initial={{ width: 0 }}
           animate={isInView ? { width: `${skill.level}%` } : {}}
-          transition={{ duration: 0.8, delay: index * 0.05, ease: 'easeOut' }}
-          className="h-full rounded-full"
+          transition={{ duration: 0.8, delay: index * 0.06 + 0.2, ease: 'easeOut' }}
+          className="h-full rounded-full relative"
           style={{ 
             backgroundColor: skill.color,
-            boxShadow: `0 0 10px ${skill.color}50`
+            boxShadow: `0 0 10px ${skill.color}60`
           }}
-        />
+        >
+          {/* Shimmer effect */}
+          <motion.div 
+            className="absolute inset-0 opacity-50"
+            animate={{ x: ['-100%', '200%'] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'linear', repeatDelay: 1 }}
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+              width: '50%'
+            }}
+          />
+        </motion.div>
       </div>
     </motion.div>
   )
@@ -196,12 +255,43 @@ export default function SkillsSection() {
 
         {/* Main content area */}
         {showSimplifiedView ? (
-          // Simplified skill bars for mobile
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-            {skills.map((skill, index) => (
-              <SkillBar key={skill.name} skill={skill} index={index} />
-            ))}
-          </div>
+          // Enhanced galaxy-style skill cards for mobile
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            {/* Decorative floating orbs for mobile */}
+            <div className={`absolute -top-10 -left-10 w-32 h-32 rounded-full blur-3xl opacity-30 ${
+              isDark ? 'bg-neural-glow' : 'bg-sky-300'
+            }`} />
+            <div className={`absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-20 ${
+              isDark ? 'bg-purple-500' : 'bg-purple-300'
+            }`} />
+            
+            {/* Filtered skills based on active category */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 relative z-10">
+              {(activeCategory 
+                ? skills.filter(s => s.category === activeCategory)
+                : skills
+              ).map((skill, index) => (
+                <SkillBar key={skill.name} skill={skill} index={index} isDark={isDark} />
+              ))}
+            </div>
+
+            {/* Interactive hint for mobile */}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className={`text-center mt-6 text-sm ${
+                isDark ? 'text-neural-500' : 'text-slate-500'
+              }`}
+            >
+              👆 Tap cards for details • Use filters above
+            </motion.p>
+          </motion.div>
         ) : (
           // 3D Galaxy visualization for desktop
           <div className="relative h-[500px] lg:h-[550px]">
