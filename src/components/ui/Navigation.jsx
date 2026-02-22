@@ -54,14 +54,16 @@ export default function Navigation({ scrollTo }) {
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 group"
           >
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+            <div className={`w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-all ${
               isDark 
-                ? 'bg-neural-glow/10 border border-neural-glow/30 group-hover:border-neural-glow/50'
-                : 'bg-sky-100 border-2 border-sky-400 group-hover:border-sky-500'
+                ? 'ring-2 ring-neural-glow/30 group-hover:ring-neural-glow/60'
+                : 'ring-2 ring-sky-400 group-hover:ring-sky-500 shadow-md'
             }`}>
-              <span className={`font-display font-bold text-lg ${
-                isDark ? 'text-neural-glow' : 'text-sky-700'
-              }`}>KS</span>
+              <img 
+                src="/Kashif.svg" 
+                alt="Kashif Siddiqui" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className={`hidden sm:block font-display font-semibold ${
               isDark ? 'text-white' : 'text-slate-900'
