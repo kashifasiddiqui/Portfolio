@@ -7,7 +7,7 @@ import { BlendFunction } from 'postprocessing'
 import HeroScene from '@/components/three/HeroScene'
 import { usePortfolioStore, useAppStore } from '@/stores/appStore'
 import { useIsMobile, useWindowSize } from '@/hooks'
-import { VisitorCounter } from '@/components/ui'
+import { VisitorCounter, MagneticButton } from '@/components/ui'
 
 /**
  * Typewriter text effect component
@@ -406,30 +406,42 @@ export default function HeroSection() {
             variants={fadeUpVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05, boxShadow: isDark ? '0 0 30px rgba(0, 212, 255, 0.4)' : '0 0 30px rgba(2, 132, 199, 0.3)' }}
-              whileTap={{ scale: 0.95 }}
-              className={`w-full sm:w-auto px-8 py-4 font-semibold rounded-lg transition-all duration-300 ${
-                isDark 
-                  ? 'bg-gradient-to-r from-neural-glow to-neural-accent text-neural-dark'
-                  : 'bg-gradient-to-r from-sky-600 to-teal-500 text-white shadow-lg'
-              }`}
-            >
-              View My Work
-            </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05, borderColor: isDark ? 'rgba(0, 212, 255, 0.6)' : 'rgba(2, 132, 199, 0.6)' }}
-              whileTap={{ scale: 0.95 }}
-              className={`w-full sm:w-auto px-8 py-4 backdrop-blur-sm font-medium rounded-lg transition-all duration-300 ${
-                isDark 
-                  ? 'bg-neural-950/50 border border-neural-glow/30 text-neural-glow'
-                  : 'bg-white/80 border-2 border-sky-400 text-sky-700 shadow-md'
-              }`}
-            >
-              Get in Touch
-            </motion.a>
+            <MagneticButton strength={0.2}>
+              <motion.a
+                href="#projects"
+                data-cursor-text="VIEW"
+                whileHover={{ scale: 1.05, boxShadow: isDark ? '0 0 40px rgba(0, 212, 255, 0.5)' : '0 0 40px rgba(2, 132, 199, 0.4)' }}
+                whileTap={{ scale: 0.95 }}
+                className={`relative w-full sm:w-auto px-8 py-4 font-semibold rounded-xl transition-all duration-300 overflow-hidden group ${
+                  isDark 
+                    ? 'bg-gradient-to-r from-neural-glow to-neural-accent text-neural-dark'
+                    : 'bg-gradient-to-r from-sky-600 to-teal-500 text-white shadow-lg'
+                }`}
+              >
+                <span className="relative z-10">View My Work</span>
+                <motion.div 
+                  className="absolute inset-0 bg-white/20"
+                  initial={{ x: '-100%', skewX: '-15deg' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.5 }}
+                />
+              </motion.a>
+            </MagneticButton>
+            <MagneticButton strength={0.2}>
+              <motion.a
+                href="#contact"
+                data-cursor-text="CONTACT"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`relative w-full sm:w-auto px-8 py-4 backdrop-blur-sm font-medium rounded-xl transition-all duration-300 overflow-hidden group ${
+                  isDark 
+                    ? 'bg-neural-950/50 border-2 border-neural-glow/30 text-neural-glow hover:border-neural-glow/60 hover:bg-neural-glow/10'
+                    : 'bg-white/80 border-2 border-sky-400 text-sky-700 shadow-md hover:bg-sky-50'
+                }`}
+              >
+                <span className="relative z-10">Get in Touch</span>
+              </motion.a>
+            </MagneticButton>
           </motion.div>
 
           {/* Visitor Counter */}

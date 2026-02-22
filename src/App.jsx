@@ -53,7 +53,7 @@ function App() {
   }, [setLoading])
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${
+    <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 noise-overlay ${
       theme === 'dark' ? 'bg-neural-dark' : 'bg-slate-50'
     }`}>
       {/* Loading Screen */}
