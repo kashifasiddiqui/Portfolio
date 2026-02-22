@@ -303,10 +303,11 @@ function InfiniteCarousel({ projects, isDark, isPaused, onCardHover }) {
 
       {/* Scrolling track with CSS animation */}
       <div
-        className="flex gap-6 hover:[animation-play-state:paused]"
+        className="flex gap-6"
         style={{ 
           width: 'fit-content',
-          animation: isPaused ? 'none' : `scrollLoop ${projects.length * 8}s linear infinite`,
+          animation: `scrollLoop ${projects.length * 8}s linear infinite`,
+          animationPlayState: isPaused ? 'paused' : 'running',
         }}
       >
         {doubleProjects.map((project, index) => (
