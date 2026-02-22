@@ -194,6 +194,16 @@ export const usePortfolioStore = create((set) => ({
       github: 'https://github.com/reyansh-byte/Voltera--Your-Solar-Energy-Solution-',
       demo: '#',
       featured: true
+    },
+    {
+      id: 5,
+      title: 'Portfolio',
+      description: 'Modern, immersive 3D portfolio website built with React, Three.js, and Framer Motion featuring interactive visualizations and smooth animations.',
+      tags: ['React', 'Three.js', 'Framer Motion', 'TailwindCSS', 'Vite'],
+      image: '/projects/portfolio.jpg',
+      github: 'https://github.com/kashifasiddiqui/Portfolio.git',
+      demo: '#',
+      featured: true
     }
   ],
 

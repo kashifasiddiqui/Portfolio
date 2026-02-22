@@ -7,6 +7,7 @@ import { BlendFunction } from 'postprocessing'
 import HeroScene from '@/components/three/HeroScene'
 import { usePortfolioStore, useAppStore } from '@/stores/appStore'
 import { useIsMobile, useWindowSize } from '@/hooks'
+import { VisitorCounter } from '@/components/ui'
 
 /**
  * Typewriter text effect component
@@ -429,6 +430,14 @@ export default function HeroSection() {
             >
               Get in Touch
             </motion.a>
+          </motion.div>
+
+          {/* Visitor Counter */}
+          <motion.div
+            variants={fadeUpVariants}
+            className="mt-8 flex justify-center"
+          >
+            <VisitorCounter />
           </motion.div>
         </div>
 

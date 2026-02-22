@@ -12,6 +12,7 @@ A cinematic, scroll-driven 3D portfolio showcasing Backend, AI & Machine Learnin
 An immersive, production-ready portfolio that takes recruiters and tech leads on a journey through an AI engineer's mind, featuring:
 
 - **Neural Awakening** - Interactive 3D brain hero section
+- **Live Visitor Counter** - Real-time visitor tracking with animated display
 - **Learning Timeline** - Animated career progression
 - **Intelligence Lab** - Project showcase with 3D elements
 - **Skills Galaxy** - Interactive 3D skill constellation
@@ -42,7 +43,8 @@ src/
 │       ├── CustomCursor.jsx
 │       ├── LoadingScreen.jsx
 │       ├── Navigation.jsx
-│       └── ScrollProgress.jsx
+│       ├── ScrollProgress.jsx
+│       └── VisitorCounter.jsx
 ├── sections/            # Page sections
 │   ├── HeroSection.jsx
 │   ├── TimelineSection.jsx
@@ -240,11 +242,13 @@ colors: {
 - [x] Contact terminal
 
 ### Phase 4: Polish (Week 4)
-- [ ] Performance optimization
-- [ ] Mobile testing
-- [ ] Accessibility audit
-- [ ] SEO optimization
-- [ ] Deployment setup
+- [x] Performance optimization
+- [x] Mobile testing
+- [x] Accessibility audit
+- [x] SEO optimization
+- [x] Deployment setup
+- [x] Visitor counter integration
+- [x] Portfolio project showcase
 
 ## 🚢 Deployment
 
