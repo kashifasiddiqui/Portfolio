@@ -1,9 +1,22 @@
 # Kashif Siddiqui - AI & ML Developer Portfolio
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Portfolio-00d4ff?style=for-the-badge&logo=vercel)](https://kashif-portfolio-sigma.vercel.app)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)](https://react.dev)
+[![Three.js](https://img.shields.io/badge/Three.js-R3F-black?style=flat-square&logo=three.js)](https://threejs.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite)](https://vitejs.dev)
+[![Framer Motion](https://img.shields.io/badge/Framer-Motion-FF0055?style=flat-square&logo=framer)](https://www.framer.com/motion)
+
 A cinematic, scroll-driven 3D portfolio showcasing Backend, AI & Machine Learning expertise through an interactive digital brain environment.
 
+## 🔗 Live Demo
+
+**[👉 Visit Portfolio: https://kashif-portfolio-sigma.vercel.app](https://kashif-portfolio-sigma.vercel.app)**
+
 **Location:** Mumbai, Maharashtra  
-**Email:** kashif.arshad.siddiqui@gmail.com
+**Email:** kashif.arshad.siddiqui@gmail.com  
+**LinkedIn:** [kashif-arshad-siddiqui](https://www.linkedin.com/in/kashif-arshad-siddiqui/)  
+**GitHub:** [kashifasiddiqui](https://github.com/kashifasiddiqui)
 
 ![Portfolio Preview](./preview.png)
 
@@ -294,3 +307,7 @@ MIT License - Feel free to use this for your own portfolio!
 ---
 
 **Built with 💙 using React Three Fiber**
+
+## 🏷️ Keywords
+
+`portfolio` `react` `three.js` `react-three-fiber` `3d-portfolio` `developer-portfolio` `ai-engineer` `machine-learning` `framer-motion` `tailwindcss` `vite` `zustand` `interactive-portfolio` `webgl` `frontend` `fullstack` `neural-network` `data-science` `python` `tensorflow` `fastapi` `backend-developer`
