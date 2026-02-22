@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/brain.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Inside the Mind of an AI Engineer - Interactive 3D Developer Portfolio" />
+    <meta name="theme-color" content="#050810" />
+    
+    <!-- Inline script to prevent flash -->
+    <script>
+      (function() {
+        const stored = localStorage.getItem('portfolio-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.classList.add(theme);
+        document.documentElement.classList.remove(theme === 'dark' ? 'light' : 'dark');
+      })();
+    </script>
+    
+    <!-- Preconnect to font servers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <title>Kashif Siddiqui | AI & ML Developer Portfolio</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kashif Siddiqui - Inside the Mind of an AI Engineer" />
+    <meta property="og:description" content="Backend, AI & Machine Learning Developer from Mumbai. Building intelligent, scalable AI-powered systems." />
+    <meta property="og:type" content="website" />
+    
+    <style>
+      /* Critical CSS for initial load */
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #050810;
+        color: #ffffff;
+        font-family: 'Inter', system-ui, sans-serif;
+        overflow-x: hidden;
+      }
+      
+      /* Loading screen */
+      .initial-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #050810;
+        z-index: 9999;
+      }
+      
+      .loader-pulse {
+        width: 60px;
+        height: 60px;
+        border: 2px solid rgba(0, 212, 255, 0.3);
+        border-radius: 50%;
+        animation: pulse-ring 1.5s ease-out infinite;
+      }
+      
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.5);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="initial-loader">
+        <div class="loader-pulse"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

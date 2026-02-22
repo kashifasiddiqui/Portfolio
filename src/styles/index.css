@@ -1,0 +1,498 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Dark mode (default) */
+  html.dark body,
+  body {
+    @apply bg-neural-dark text-white font-sans;
+    background: linear-gradient(135deg, #0a0f1a 0%, #050810 50%, #0a0f1a 100%);
+  }
+
+  /* Light mode */
+  html.light body {
+    @apply bg-slate-50 text-slate-900 font-sans;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+  }
+
+  html.dark ::selection {
+    @apply bg-neural-glow/30 text-white;
+  }
+
+  html.light ::selection {
+    @apply bg-sky-200 text-sky-900;
+  }
+
+  /* Custom scrollbar - Dark */
+  html.dark ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  html.dark ::-webkit-scrollbar-track {
+    @apply bg-neural-900;
+  }
+
+  html.dark ::-webkit-scrollbar-thumb {
+    @apply bg-neural-glow/30 rounded-full;
+  }
+
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neural-glow/50;
+  }
+
+  /* Custom scrollbar - Light */
+  html.light ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  html.light ::-webkit-scrollbar-track {
+    @apply bg-slate-200;
+  }
+
+  html.light ::-webkit-scrollbar-thumb {
+    @apply bg-sky-400/50 rounded-full;
+  }
+
+  html.light ::-webkit-scrollbar-thumb:hover {
+    @apply bg-sky-500/70;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  /* Dark mode text gradient */
+  html.dark .neural-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-neural-glow to-neural-cyan;
+  }
+
+  /* Light mode text gradient - darker for visibility */
+  html.light .neural-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-sky-700 to-teal-600;
+  }
+
+  .neural-border {
+    @apply border border-neural-glow/20 rounded-lg;
+  }
+
+  html.light .neural-border {
+    @apply border-sky-300;
+  }
+
+  /* Dark mode card */
+  html.dark .neural-card {
+    @apply bg-neural-950/80 backdrop-blur-md border border-neural-glow/10 rounded-xl;
+    box-shadow: 
+      0 0 30px rgba(0, 212, 255, 0.05),
+      inset 0 0 30px rgba(0, 212, 255, 0.02);
+  }
+
+  /* Light mode card - better shadow */
+  html.light .neural-card {
+    @apply bg-white backdrop-blur-md border border-slate-200 rounded-xl;
+    box-shadow: 
+      0 4px 24px rgba(15, 23, 42, 0.08),
+      0 2px 8px rgba(15, 23, 42, 0.06);
+  }
+
+  /* Dark mode buttons */
+  html.dark .neural-button {
+    @apply px-6 py-3 bg-neural-glow/10 border border-neural-glow/30 rounded-lg 
+           text-neural-glow font-medium transition-all duration-300
+           hover:bg-neural-glow/20 hover:border-neural-glow/50 hover:shadow-neural;
+  }
+
+  /* Light mode buttons - stronger colors */
+  html.light .neural-button {
+    @apply px-6 py-3 bg-sky-100 border border-sky-300 rounded-lg 
+           text-sky-700 font-medium transition-all duration-300
+           hover:bg-sky-200 hover:border-sky-400;
+  }
+
+  html.dark .neural-button-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-neural-glow to-neural-accent 
+           text-neural-dark font-semibold rounded-lg transition-all duration-300
+           hover:shadow-neural-lg hover:scale-105;
+  }
+
+  html.light .neural-button-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-sky-600 to-teal-500 
+           text-white font-semibold rounded-lg transition-all duration-300
+           hover:shadow-xl hover:scale-105;
+  }
+
+  .section-container {
+    @apply relative min-h-screen w-full py-20 px-4 md:px-8 lg:px-16;
+  }
+
+  html.dark .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white;
+  }
+
+  html.light .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-slate-800;
+  }
+
+  html.dark .section-subtitle {
+    @apply text-lg md:text-xl text-neural-300 max-w-2xl;
+  }
+
+  html.light .section-subtitle {
+    @apply text-lg md:text-xl text-slate-700 max-w-2xl;
+  }
+
+  html.dark .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+  }
+
+  html.light .glass-panel {
+    @apply bg-white/80 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-lg;
+  }
+
+  /* Terminal Styles - Dark */
+  html.dark .terminal {
+    @apply font-mono text-sm bg-neural-950 border border-neural-glow/20 rounded-lg overflow-hidden;
+  }
+
+  /* Terminal Styles - Light */
+  html.light .terminal {
+    @apply font-mono text-sm bg-slate-900 border border-slate-300 rounded-lg overflow-hidden;
+  }
+
+  html.dark .terminal-header {
+    @apply flex items-center gap-2 px-4 py-2 bg-neural-900/50 border-b border-neural-glow/10;
+  }
+
+  html.light .terminal-header {
+    @apply flex items-center gap-2 px-4 py-2 bg-slate-800 border-b border-slate-700;
+  }
+
+  .terminal-dot {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  .terminal-body {
+    @apply p-4;
+  }
+
+  .terminal-line {
+    @apply flex items-center gap-2;
+  }
+
+  .terminal-prompt {
+    @apply text-neural-glow;
+  }
+
+  .terminal-cursor {
+    @apply inline-block w-2 h-4 bg-neural-glow animate-pulse;
+  }
+
+  /* Grid overlay - Dark */
+  html.dark .neural-grid-bg {
+    background-image: 
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Grid overlay - Light */
+  html.light .neural-grid-bg {
+    background-image: 
+      linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Scan line effect */
+  .scan-line::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 212, 255, 0.03) 50%,
+      transparent 100%
+    );
+    animation: scan-line 8s linear infinite;
+  }
+}
+
+/* 
+ * Light mode color overrides for custom neural- colors only
+ * Note: We don't override built-in Tailwind classes (text-white, etc.) 
+ * to avoid circular dependencies. Components handle white text via theme state.
+ */
+
+/* Light mode section backgrounds */
+html.light section {
+  background-color: transparent;
+}
+
+/* Light mode neural color overrides - improved visibility */
+html.light .text-neural-300 {
+  color: #475569 !important;
+}
+
+html.light .text-neural-400 {
+  color: #334155 !important;
+}
+
+html.light .text-neural-500 {
+  color: #475569 !important;
+}
+
+html.light .text-neural-glow {
+  color: #0369a1 !important;
+}
+
+/* Light mode backgrounds - warmer white */
+html.light .bg-neural-dark {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-neural-950 {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-neural-900 {
+  background-color: #e2e8f0 !important;
+}
+
+html.light .bg-neural-950\/80 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light .bg-neural-900\/50 {
+  background-color: rgba(226, 232, 240, 0.6) !important;
+}
+
+html.light .bg-neural-glow\/10 {
+  background-color: rgba(3, 105, 161, 0.1) !important;
+}
+
+html.light .bg-neural-glow\/20 {
+  background-color: rgba(3, 105, 161, 0.15) !important;
+}
+
+/* Light mode borders - more visible */
+html.light .border-neural-glow\/10 {
+  border-color: rgba(3, 105, 161, 0.2) !important;
+}
+
+html.light .border-neural-glow\/20 {
+  border-color: rgba(3, 105, 161, 0.25) !important;
+}
+
+html.light .border-neural-glow\/30 {
+  border-color: rgba(3, 105, 161, 0.35) !important;
+}
+
+html.light .border-neural-800 {
+  border-color: #cbd5e1 !important;
+}
+
+/* Light mode gradient backgrounds */
+html.light .from-neural-dark {
+  --tw-gradient-from: #f1f5f9 !important;
+}
+
+html.light .to-neural-dark {
+  --tw-gradient-to: #f1f5f9 !important;
+}
+
+html.light .via-transparent {
+  --tw-gradient-via: transparent !important;
+}
+
+/* Radial glow for light mode - subtle but visible */
+html.light .bg-radial-glow {
+  background: radial-gradient(ellipse at center, rgba(3, 105, 161, 0.06) 0%, transparent 70%);
+}
+
+/* Light mode scrollbar improvements */
+html.light ::-webkit-scrollbar-thumb {
+  background-color: rgba(3, 105, 161, 0.3) !important;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(3, 105, 161, 0.5) !important;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background-color: #e2e8f0 !important;
+}
+
+/* Light mode card and panel backgrounds */
+html.light .backdrop-blur-sm {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .backdrop-blur-lg {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Light mode border improvements */
+html.light .border-neural-800\/50 {
+  border-color: rgba(148, 163, 184, 0.5) !important;
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Theme-aware text colors - using direct values */
+  .text-theme-primary {
+    color: #ffffff;
+  }
+
+  .text-theme-secondary {
+    color: #94a3b8;
+  }
+
+  .text-theme-muted {
+    color: #64748b;
+  }
+
+  /* Glow effects */
+  .glow-sm {
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+  }
+
+  .glow-md {
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
+  }
+
+  .glow-lg {
+    filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.5));
+  }
+
+  /* Animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+/* Light mode theme-aware text overrides */
+html.light .text-theme-primary {
+  color: #1e293b !important;
+}
+
+html.light .text-theme-secondary {
+  color: #64748b !important;
+}
+
+html.light .text-theme-muted {
+  color: #94a3b8 !important;
+}
+
+/* ============================================
+   Mobile Responsive Styles
+   ============================================ */
+
+@media (max-width: 640px) {
+  /* Smaller section padding on mobile */
+  .section-container {
+    @apply py-12 px-4;
+  }
+
+  /* Smaller section titles on mobile */
+  .section-title {
+    @apply text-3xl;
+  }
+
+  .section-subtitle {
+    @apply text-base;
+  }
+
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+  }
+
+  /* Terminal adjustments */
+  .terminal-body {
+    @apply p-3 text-xs;
+    min-height: 200px !important;
+  }
+
+  /* Card padding adjustments */
+  .neural-card {
+    @apply p-4;
+  }
+
+  /* Form input touch-friendly sizing */
+  input, textarea {
+    @apply py-3.5 text-base;
+  }
+
+  /* Grid gap adjustments */
+  .gap-8 {
+    gap: 1.25rem;
+  }
+
+  .gap-6 {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screen adjustments */
+  .section-title {
+    @apply text-2xl;
+  }
+
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Smaller badges */
+  .font-mono {
+    @apply text-xs;
+  }
+}
+
+/* Improve tap target sizes for mobile */
+@media (pointer: coarse) {
+  button:not(.terminal-dot),
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: max(0px)) {
+  .section-container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
