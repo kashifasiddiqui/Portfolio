@@ -406,13 +406,13 @@ export default function HeroSection() {
             variants={fadeUpVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <MagneticButton strength={0.2}>
+            <MagneticButton strength={0.2} className="w-full sm:w-auto">
               <motion.a
                 href="#projects"
                 data-cursor-text="VIEW"
                 whileHover={{ scale: 1.05, boxShadow: isDark ? '0 0 40px rgba(0, 212, 255, 0.5)' : '0 0 40px rgba(2, 132, 199, 0.4)' }}
                 whileTap={{ scale: 0.95 }}
-                className={`relative w-full sm:w-auto px-8 py-4 font-semibold rounded-xl transition-all duration-300 overflow-hidden group ${
+                className={`relative block text-center px-8 py-4 font-semibold rounded-xl transition-all duration-300 overflow-hidden group ${
                   isDark 
                     ? 'bg-gradient-to-r from-neural-glow to-neural-accent text-neural-dark'
                     : 'bg-gradient-to-r from-sky-600 to-teal-500 text-white shadow-lg'
@@ -427,13 +427,13 @@ export default function HeroSection() {
                 />
               </motion.a>
             </MagneticButton>
-            <MagneticButton strength={0.2}>
+            <MagneticButton strength={0.2} className="w-full sm:w-auto">
               <motion.a
                 href="#contact"
                 data-cursor-text="CONTACT"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`relative w-full sm:w-auto px-8 py-4 backdrop-blur-sm font-medium rounded-xl transition-all duration-300 overflow-hidden group ${
+                className={`relative block text-center px-8 py-4 backdrop-blur-sm font-medium rounded-xl transition-all duration-300 overflow-hidden group ${
                   isDark 
                     ? 'bg-neural-950/50 border-2 border-neural-glow/30 text-neural-glow hover:border-neural-glow/60 hover:bg-neural-glow/10'
                     : 'bg-white/80 border-2 border-sky-400 text-sky-700 shadow-md hover:bg-sky-50'
