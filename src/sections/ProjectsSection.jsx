@@ -1,5 +1,5 @@
 import { motion, useScroll } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { usePortfolioStore, useAppStore } from '@/stores/appStore'
 import { useInView } from '@/hooks'
 import { Scene, ProjectsScene } from '@/components/three'
@@ -273,11 +273,40 @@ function ProjectCard({ project, index, colorScheme, isDark, onHover }) {
 
 // Carousel with smooth infinite scroll using CSS animation
 function InfiniteCarousel({ projects, isDark, isPaused, onCardHover }) {
+  const trackRef = useRef(null)
+  const positionRef = useRef(0)
+  const animationRef = useRef(null)
   const cardWidth = 380 + 24 // card width + gap (md size)
   const totalWidth = projects.length * cardWidth
   
   // Create double set for seamless loop
   const doubleProjects = [...projects, ...projects]
+
+  useEffect(() => {
+    const speed = 0.5 // pixels per frame
+    
+    const animate = () => {
+      if (!isPaused && trackRef.current) {
+        positionRef.current += speed
+        
+        // Reset when we've scrolled past the first set
+        if (positionRef.current >= totalWidth) {
+          positionRef.current = 0
+        }
+        
+        trackRef.current.style.transform = `translateX(-${positionRef.current}px)`
+      }
+      animationRef.current = requestAnimationFrame(animate)
+    }
+    
+    animationRef.current = requestAnimationFrame(animate)
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [isPaused, totalWidth])
 
   return (
     <div className="relative overflow-hidden py-6">
@@ -293,22 +322,11 @@ function InfiniteCarousel({ projects, isDark, isPaused, onCardHover }) {
           : 'bg-gradient-to-l from-slate-100 via-slate-100/90 to-transparent'
       }`} />
 
-      {/* Keyframe animation style */}
-      <style>{`
-        @keyframes scrollLoop {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-
-      {/* Scrolling track with CSS animation */}
+      {/* Scrolling track */}
       <div
+        ref={trackRef}
         className="flex gap-6"
-        style={{ 
-          width: 'fit-content',
-          animation: `scrollLoop ${projects.length * 8}s linear infinite`,
-          animationPlayState: isPaused ? 'paused' : 'running',
-        }}
+        style={{ width: 'fit-content' }}
       >
         {doubleProjects.map((project, index) => (
           <ProjectCard

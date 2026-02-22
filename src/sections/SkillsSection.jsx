@@ -258,7 +258,7 @@ export default function SkillsSection() {
           {[
             { value: skills.length, label: 'Technologies', icon: '🔧' },
             { value: `${Math.round(skills.reduce((a, s) => a + s.level, 0) / skills.length)}%`, label: 'Proficiency', icon: '📊' },
-            { value: '4+', label: 'Years Freelance', icon: '💼' },
+            { value: '4+', label: 'Freelancer Projects', icon: '💼' },
             { value: '20+', label: 'Projects', icon: '🚀' }
           ].map((stat, index) => (
             <motion.div
