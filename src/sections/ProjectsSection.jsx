@@ -325,8 +325,8 @@ function InfiniteCarousel({ projects, isDark, isPaused, onCardHover }) {
       {/* Scrolling track */}
       <div
         ref={trackRef}
-        className="flex gap-6"
-        style={{ width: 'fit-content' }}
+        className="flex gap-6 will-change-transform"
+        style={{ width: 'fit-content', transform: 'translateZ(0)' }}
       >
         {doubleProjects.map((project, index) => (
           <ProjectCard
